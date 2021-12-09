@@ -5,6 +5,10 @@ import MsgCard from 'components/elements/MsgCard.svelte';
 import Loading from 'components/elements/Loading.svelte';
 
 
+import Navbar from 'layouts/Navbar.svelte';
+// import Footer from 'layouts/Footer.svelte';
+
+
 import { defaultChainStore, web3, connected, selectedAccount, chainId, chainData } from 'svelte-web3';
 
 import { Route } from 'svelte-router-spa';
@@ -55,6 +59,8 @@ async function enable() {
 
 
 {#if $connected}
+
+<Navbar />
 
 <Route {current_route} />
 

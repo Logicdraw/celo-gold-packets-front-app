@@ -4,13 +4,6 @@ export let currentRoute;
 
 import { defaultChainStore, web3, connected, selectedAccount, chainId, chainData } from 'svelte-web3';
 
-
-import MsgCard from 'components/elements/MsgCard.svelte';
-import Loading from 'components/elements/Loading.svelte';
-
-
-// async function check...
-
 </script>
 
 
@@ -20,8 +13,14 @@ import Loading from 'components/elements/Loading.svelte';
 
 
 
+<section class="section">
 
-<!-- Hcaptcha :) -->
+	<div class="container">
 
+		<!-- -- -->
+
+	</div>
+
+</section>
 
 
