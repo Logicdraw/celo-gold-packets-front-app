@@ -1,42 +1,5 @@
+
 <script>
-
-// import { encryptTxnIDAndEncodeURIComponent } from 'utils/index.js';
-
-// console.log(app_);
-// console.log(app_.env.TEST);
-
-// console.log(app_.env.IS_PROD);
-const adult_rep_api_url = app_.env.TEST;
-
-console.log(adult_rep_api_url);
-
-// Encrypt
-// var ciphertext = CryptoJS.AES.encrypt('0x096cc8f140af6328c06f0a8da3322a9a9f529867ad2c4d616e3de31bb2415e8e', 'x096cc8f140af6328c06f0a8d');
-var encrypted = CryptoJS.AES.encrypt("0x096cc8f140af6328c06f0a8da3322a9a9f529867ad2c4d616e3de31bb2415e8e", "Secret Passphrase");
-
-console.log(encrypted.toString());
-
-var poop = encodeURIComponent(encrypted.toString());
-
-console.log(decodeURIComponent(poop));
- 
-// Decrypt
-// var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), 'x096cc8f140af6328c06f0a8d');
-// var plaintext = bytes.toString(CryptoJS.enc.Utf8);
- 
-// console.log(bytes)
-// console.log(plaintext);
-
-// var cool = ciphertext.ciphertext();
-
-
-</script>
-
-
-{poop}<br>
-<!-- {plaintext} -->
-
-<!-- <script>
 export let currentRoute;
 
 export let name;
@@ -120,4 +83,3 @@ $: metamaskConnected = window.ethereum ? window.ethereum.isConnected() : false;
 </section>
 
 
- -->

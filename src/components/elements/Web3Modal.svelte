@@ -21,7 +21,9 @@ const enable = async () => {
 				}
 			}
 		},
-		disableInjectedsetBrowserProvider: false,
+		disableInjectedProvider: true,
+		// disableInjectedsetBrowserProvider: false,
+		disableInjectedsetBrowserProvider: true,
 	});
 	
 	const provider = await web3Modal.connect();
