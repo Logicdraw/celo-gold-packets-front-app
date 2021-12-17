@@ -1,85 +1,102 @@
-
 <script>
 export let currentRoute;
 
-export let name;
 
-import MonoChain from 'components/elements/MonoChain.svelte';
-import MultiChain from 'components/elements/MultiChain.svelte';
-import Web3Modal from 'components/elements/Web3Modal.svelte';
+import { defaultChainStore, web3, connected, selectedAccount, chainId, chainData } from 'svelte-web3';
 
 
-let example = MonoChain;
+// import Web3Modal from 'components/elements/_Web3Modal.svelte';
+
+import SendForm from 'components/forms/views/create/SendForm.svelte';
 
 
-$: metamaskConnected = window.ethereum ? window.ethereum.isConnected() : false;
+import { Navigate, navigateTo } from 'svelte-router-spa';
+
+
+
+
+
+
+// $: checkAccount = $selectedAccount || '0x0000000000000000000000000000000000000000';
+// $: balance = $connected ? $web3.eth.getBalance(checkAccount) : '';
+
+let balance;
+
+
+async function getBalanceNorm() {
+	balance = await $web3.eth.getBalance($selectedAccount);
+	console.log(balance);
+	return $web3.utils.fromWei(balance, 'ether');
+}
+
+
+let balanceNorm = getBalanceNorm();
 
 </script>
 
-<section class="section pb-0">
-	<div class="container">
-		<h1 class="title">
-			svelte-web3 usage example with Svelte
-		</h1>
 
-		<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 
-		<p>Visit the <a href="https://web3js.readthedocs.io/en/">Web3.js documentation</a> to learn how to use Web3.js library.</p>
+{#await balanceNorm}
 
-		{#if window.Web3}
-			<p>The Web3.js library has been injected in Global window Object (version: {window.Web3.version}).</p>
-		{:else}
-			<div class="notification is-warning">
-				<strong>Error! The Web3.js library has not been detected in the Global window Object.</strong>
-				Please check that Web3.js has been correctly added in <em class="is-family-code">public/index.html</em>
-				with the line:
-				<pre>
-				&lt;script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js">&lt;/script>
-				</pre>
-			</div>
-		{/if}
+<section class="hero">
 
-		<p>Browser wallet detected in Global Object window.ethereum : { window.ethereum ? 'yes' : 'no' }</p>
+	<div class="hero-body">
 
-		{#if window.ethereum}
-			<p>Browser wallet already connected to metamask : { metamaskConnected }</p>
-		{/if}
+		<div class="container">
+
+			Loading ...
+
+		</div>
 
 	</div>
+
 </section>
+
+{:then value}
 
 
 <section class="section">
 
 	<div class="container">
 
-		<div class="tabs is-toggle is-toggle-rounded">
-			<ul>
-				<li on:click={() => {example = MonoChain}} class:is-active={/MonoChain/.test(example.toString())}>
-					<a>
-						<span class="icon is-small"><i class="fas fa-image"></i></span>
-						<span>MonoChain</span>
-					</a>
-				</li>
-				<li on:click={() => {example = Web3Modal}}  class:is-active={/Web3Modal/.test(example.toString())}>
-					<a>
-						<span class="icon is-small"><i class="fas fa-music"></i></span>
-						<span>Web3Modal</span>
-					</a>
-				</li>
-				<li on:click={() => {example = MultiChain}}  class:is-active={/MultiChain/.test(example.toString())}>
-					<a>
-						<span class="icon is-small"><i class="fas fa-music"></i></span>
-						<span>MultiChains</span>
-					</a>
-				</li>
-			</ul>
+		<div class="card">
+
+			<div class="card-content">
+
+				Your balance:<br>
+				{value}
+				{$chainData.nativeCurrency?.symbol}
+
+			</div>
+
 		</div>
 
-		<svelte:component this={example} />
+		<br>
+		<br>
+
+		<SendForm />
 
 	</div>
 
 </section>
 
+{:catch error}
+
+Error!
+
+{/await}
+
+
+
+<!-- <Navigate to='/create' styles='button is-link'>
+	Create
+</Navigate>
+
+
+
+<Navigate to='/receive' styles='button is-link'>
+	Receive
+</Navigate>
+
+ -->
 

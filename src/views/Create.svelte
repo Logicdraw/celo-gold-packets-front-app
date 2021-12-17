@@ -24,7 +24,7 @@ import SendForm from 'components/forms/views/create/SendForm.svelte';
 
 	<div class="container">
 
-		<!-- ... -->
+		Create
 
 	</div>
 

@@ -9,7 +9,9 @@ import Navbar from 'layouts/Navbar.svelte';
 // import Footer from 'layouts/Footer.svelte';
 
 
+
 import { defaultChainStore, web3, connected, selectedAccount, chainId, chainData } from 'svelte-web3';
+
 
 import { Route } from 'svelte-router-spa';
 import { onMount } from 'svelte';
@@ -29,14 +31,14 @@ async function enable() {
 				options: {
 					rpc: {
 						44787: "https://alfajores-forno.celo-testnet.org",
-						42220: "https://forno.celo.org",
+						// 42220: "https://forno.celo.org",
 					},	
 				}
 			}
 		},
-		disableInjectedProvider: true,
-		// disableInjectedsetBrowserProvider: false,
+		disableInjectedProvider: false,
 		disableInjectedsetBrowserProvider: true,
+		// disableInjectedsetBrowserProvider: true,
 	});
 	
 	const provider = await web3Modal.connect();
@@ -45,9 +47,7 @@ async function enable() {
 }
 
 
-// or connect phone number ... :)
 
-// store :)
 
 </script>
 
@@ -60,20 +60,28 @@ async function enable() {
 
 {#if $connected}
 
-<Navbar />
-
-<Route {current_route} />
+<Route {currentRoute} />
 
 {:else}
 
 {#if $web3.version}
 
-<MsgCard msg_text={'Connect using your Valora wallet!'} msg_type={'error'} msg_show={true} msg_forever={true} />
+<section class="hero is-fullheight">
 
-<!-- Connect your valora wallet button ... -->
-<div class="buttons">
-	<button class="button is-link is-light" on:click="{enable}">connect your Valora wallet</button>
-</div>
+	<div class="hero-body">
+
+		<div class="container">
+
+			<div class="buttons is-centered">
+				<button class="button is-link is-light" on:click="{enable}">Connect Wallet!</button>
+			</div>
+
+		</div>
+
+	</div>
+
+</section>
+
 
 {:else}
 
@@ -82,4 +90,5 @@ async function enable() {
 {/if}
 
 {/if}
+
 

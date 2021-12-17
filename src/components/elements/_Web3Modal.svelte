@@ -3,8 +3,10 @@ export let name;
 
 import { defaultChainStore, web3, connected, selectedAccount, chainId, chainData } from 'svelte-web3';
 
+
 const Web3Modal = window.Web3Modal.default;
 const WalletConnectProvider = window.WalletConnectProvider.default;
+
 
 const enable = async () => {
 

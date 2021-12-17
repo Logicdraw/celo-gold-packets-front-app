@@ -2,6 +2,16 @@
 import { Router } from 'svelte-router-spa';
 import { routes } from './router';
 
+
+import { defaultChainStore, web3, connected, selectedAccount, chainId, chainData } from 'svelte-web3';
+
+import { onMount } from 'svelte';
+
+
+// $: metamaskConnected = window.ethereum ? window.ethereum.isConnected() : false;
+
+// console.log(metamaskConnected);
+
 </script>
 
 
@@ -15,8 +25,11 @@ main {
 </style>
 
 
+
 <main>
 	<Router {routes} />
 </main>
+
+
 
 

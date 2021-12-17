@@ -4,25 +4,19 @@ export let currentRoute;
 
 import { defaultChainStore, web3, connected, selectedAccount, chainId, chainData } from 'svelte-web3';
 
-
 import MsgCard from 'components/elements/MsgCard.svelte';
 import Loading from 'components/elements/Loading.svelte';
 
-
-import ReceiveForm from 'components/forms/views/receive/ReceiveForm.svelte';
-
-
-import { Navigate, navigateTo } from 'svelte-router-spa';
+import Rec from 'components/elements/_Rec.svelte';
 
 
 
 const api_url = 'http://127.0.0.1:8000/api/v1';
 
 
+async function getPacketLeaderboard() {
 
-async function checkPacket() {
-
-	const url = `${api_url}/_resources/validate-contract/${currentRoute.namedParams.slug}`;
+	const url = `${api_url}/_resources/packet-leaderboard/${currentRoute.namedParams.slug}`;
 
 	const resp = await fetch(url, {
 		method: 'GET',
@@ -39,9 +33,11 @@ async function checkPacket() {
 }
 
 
-let promise = checkPacket();
+let promise = getPacketLeaderboard();
+
 
 </script>
+
 
 
 <style>
@@ -49,18 +45,23 @@ let promise = checkPacket();
 </style>
 
 
+
 {#await promise}
 
-loading ... :)
+loading ...
 
-{:then}
+{:then data}
 
 
 <section class="section">
-	
+
 	<div class="container">
 
-		<ReceiveForm slug={currentRoute.namedParams.slug} />
+		{#each data as recipient}
+
+			<Rec {recipient} />
+
+		{/each}
 
 	</div>
 
@@ -69,13 +70,9 @@ loading ... :)
 
 {:catch error}
 
-error ... invalid link!
+error ... 
 
 {/await}
-
-
-
-<!-- Hcaptcha :) -->
 
 
 

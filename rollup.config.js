@@ -93,11 +93,7 @@ export default {
 			app_: JSON.stringify({
 				env: {
 					IS_PROD: production,
-					TEST: 'Test123',
-					// SECRET_KEY_URL_TXN: process.env.
-					// STREAMS_API_URL: process.env.AUTH_API_URL,
-					// MAINTENANCE: process.env.MAINTENANCE,
-					// HCAPTCHA_SITE_KEY: process.env.HCAPTCHA_SITE_KEY,
+					API_URL: process.env.API_URL,
 				}
 			}),
 		}),
